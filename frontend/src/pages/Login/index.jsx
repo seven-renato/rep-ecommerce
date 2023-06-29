@@ -6,10 +6,12 @@ import { login } from "../../axios/api-calls"
 export function Login(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    
     const handleLogin = async (e) => {
         e.preventDefault()
-        const response = login({"email": email, "password": password})
+        login({"email": email, "password": password})
     }
+
     return(
         <div className="login-container">
             <div className="logo-container">

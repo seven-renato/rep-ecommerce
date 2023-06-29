@@ -8,6 +8,8 @@ import CodeIcon from '@mui/icons-material/Code';
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 
+import { registerUser, confirmationEmail, codeEmail} from "../../axios/api-calls"
+
 import { useDispatch, useSelector } from "react-redux";
 import { setMsg, resetMsg, setSucess, resetSucess } from "../../redux/registerRedux";
 
@@ -84,7 +86,7 @@ export function Register(){
   const testCode = () => {
     if (code != false){
       console.log(code)
-      // aqui chamamos a função do redux para mandar o e-mail com o código, quando ela estiver pronta
+      codeEmail({"email":email, "code":code})
       setEmailConfirmationMessage(true);
     } 
   };
@@ -102,15 +104,14 @@ export function Register(){
   const checkEmailConfirmation = () => {
     console.log(code, codeEmailConfirmation)
     if (code === codeEmailConfirmation) {
-      restartRegister()
-      
-      // aqui chamamos a função para registrar o usuário
-      // aqui enviamos o e-mail de confirmação do registro
-
-
-      dispatch(setSucess());
-      setTimeout(() => { dispatch(resetSucess()) }, 5500)
-
+      const tryRegister = registerUser({"name":name, "lastname":lastName, "email":email, "password":password})
+      if (tryRegister) {
+        confirmationEmail({"name":name, "email":email})
+       
+        restartRegister()
+        dispatch(setSucess());
+        setTimeout(() => { dispatch(resetSucess()) }, 5500)
+      } 
     } 
     else {
       dispatch(setMsg("Infelizmente o código informado é inválido."));
