@@ -25,6 +25,28 @@
         align-items: center;
         padding: 20px;
 
+        .sucess-container{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+            background-color: #d7f8d9;
+            color: #2a791a;
+            border: 1px solid #acffa8;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            height: 50px;
+            text-align: center;
+
+            .sucess-message{
+                flex: 1;
+                min-width: 40%;
+                margin: 10px 0;
+                padding: 10px;
+                border: none;
+            }
+        }
+
         .input-container{
             height: 40px;
             width: 100%;
@@ -52,9 +74,10 @@
             background-color: #1F7A8C;
             color: white;
             cursor: pointer;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15), -2px -2px 4px rgba(255, 255, 255, 0.15);
         }
 
-        .alert-container{
+        .error-container{
             display: flex;
             align-items: center;
             width: 100%;
@@ -67,7 +90,7 @@
             height: 50px;
             text-align: center;
 
-            .alert-message{
+            .error-message{
                 flex: 1;
                 min-width: 40%;
                 margin: 10px 0;
