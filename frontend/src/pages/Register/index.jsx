@@ -74,8 +74,8 @@ export function Register(){
   // Lógica dos códigos enviados ao e-mail:
   const [code, setCode] = useState(false);
 
-  const [showEmailConfirmationMessage, setEmailConfirmationMessage] = useState(false);
-  const [codeEmailConfirmation, setEmailConfirmationCode] = useState("");
+  const [showEmailConfirmationMessage, setEmailConfirmationMessage] = useState(false); // Exibir caixa de código
+  const [codeEmailConfirmation, setEmailConfirmationCode] = useState(""); // código a ser digitado
 
   useEffect(() => {
     testCode();
@@ -103,7 +103,7 @@ export function Register(){
     console.log(code, codeEmailConfirmation)
     if (code === codeEmailConfirmation) {
       restartRegister()
-
+      
       // aqui chamamos a função para registrar o usuário
       // aqui enviamos o e-mail de confirmação do registro
 

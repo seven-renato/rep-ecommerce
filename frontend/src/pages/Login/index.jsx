@@ -1,14 +1,14 @@
 import "./styles.scss"
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { login } from "../../axios/api-calls"
 
 export function Login(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const handleLogin = async (e) => {
         e.preventDefault()
-        // const response = await axios.post("http://localhost:3000/login", JSON.stringify({email, password}))
-        console.log(email, password)
+        const response = login({"email": email, "password": password})
     }
     return(
         <div className="login-container">
