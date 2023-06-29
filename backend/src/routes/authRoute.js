@@ -10,8 +10,7 @@ const users = [{
 
 routes.post("/login", (req, res) => {
     const { email, password } = req.body
-    console.log(req.body)
-
 })
+
 
 module.exports = routes

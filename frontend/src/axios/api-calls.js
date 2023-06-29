@@ -1,11 +1,11 @@
 import { publicRequest } from "./requestMethods";
 
 export const login = async (user) => {
-    try {
-        const res = await publicRequest.post("/auth/login", user);
-        return(res.data)
+  try {
+    const res = await publicRequest.post("/auth/login", user);
+    return(res.data)
     } catch (err) {
-        return false
+      return false
     }
 };
 
