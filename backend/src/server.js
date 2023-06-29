@@ -1,5 +1,6 @@
 const express = require("express")
 const cors = require("cors")
+const db = require('./db')
 
 const authRoute = require("./routes/authRoute")
 const emailRoute = require("./routes/emailRoute")
@@ -11,6 +12,6 @@ server.use(express.json())
 server.use("/rep-api/auth", authRoute)
 server.use("/rep-api/email", emailRoute)
 
-server.listen(5000, () => {
-    console.log("Server rodando em: http://localhost:5000")
-})
+db.sync().then(() => {
+    server.listen(5000)
+}).catch(err => console.log(err))
