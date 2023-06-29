@@ -1,15 +1,13 @@
 const express = require("express")
-const app = express()
-const routes = require("./routes")
+const server = express()
+const cors = require("cors")
+const authRoute = require("./routes/authRoute")
 
-app.use(express.json())
-app.use(routes)
+server.use(express.json())
+server.use(cors)
+server.use("rep-api/auth", authRoute)
 
-app.get("/", (req, res) => {
-    res.send("Hello World")
-})
-
-app.listen(3000, () => {
-    console.log("Rodando na porta 3000")
+server.listen(5000, () => {
+    console.log("Rodando na porta 5000")
 })
 
