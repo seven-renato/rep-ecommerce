@@ -12,9 +12,18 @@ export const login = async (user) => {
 export const registerUser = async (user) => {
   try {
     const res = await publicRequest.post("/auth/register", user);
-    return true
+    return res
   } catch (err) {
-    return false
+    return err.response
+  }
+};
+
+export const checkEmail = async (email) => {
+  try {
+    const res = await publicRequest.post("/auth/check-email", email);
+    return res
+  } catch (err) {
+    return err.response
   }
 };
 
