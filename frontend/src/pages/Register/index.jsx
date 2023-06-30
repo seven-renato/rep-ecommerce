@@ -8,7 +8,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 
-import { registerUser, confirmationEmail, codeEmail} from "../../axios/api-calls"
+import { registerUser, checkEmail, confirmationEmail, codeEmail} from "../../axios/api-calls"
 
 import { useDispatch, useSelector } from "react-redux";
 import { setMsg, resetMsg, setSucess, resetSucess } from "../../redux/registerRedux";
@@ -69,7 +69,7 @@ export function Register(){
     if (validateRegistration() && code === false) {
       const randomCode = generateRandomCode();
       setCode(randomCode);
-      console.log(code)
+      console.log("CODE",code)
     }
   };
 
@@ -85,10 +85,20 @@ export function Register(){
 
   const testCode = () => {
     if (code != false){
-      console.log(code)
-      codeEmail({"email":email, "code":code})
-      setEmailConfirmationMessage(true);
-    } 
+      const testEmail = checkEmail({"email":email});
+
+      testEmail.then(response => {
+        if (response.status === 200){
+          codeEmail({"email":email, "code":code});
+          setEmailConfirmationMessage(true);
+        } else {
+          dispatch(setMsg("Já existe uma conta registrada com este e-mail. Por gentileza, insira um e-mail válido!"));
+          setTimeout(() => { dispatch(resetMsg()) }, 7000)
+          restartRegister()
+        }}
+        ).catch(error => {
+          console.error(error)});
+      }
   };
 
   function restartRegister() {
@@ -105,14 +115,24 @@ export function Register(){
     console.log(code, codeEmailConfirmation)
     if (code === codeEmailConfirmation) {
       const tryRegister = registerUser({"name":name, "lastname":lastName, "email":email, "password":password})
-      if (tryRegister) {
-        confirmationEmail({"name":name, "email":email})
-       
-        restartRegister()
-        dispatch(setSucess());
-        setTimeout(() => { dispatch(resetSucess()) }, 5500)
-      } 
-    } 
+
+      tryRegister.then(response => {
+        if (response.status === 201){
+          confirmationEmail({"name":name, "email":email})
+          restartRegister()
+          dispatch(setSucess());
+          setTimeout(() => { dispatch(resetSucess()) }, 5500)
+
+        } else {
+          dispatch(setMsg("Algo de errado aconteceu com o seu cadastro, certifique-se que não há uma conta já cadastrada com o e-mail informado e tente novamente."));
+          setTimeout(() => { dispatch(resetMsg()) }, 7000)
+          restartRegister()
+        }}
+
+      ).catch(error => {
+        console.error(error)});
+    }
+
     else {
       dispatch(setMsg("Infelizmente o código informado é inválido."));
       setTimeout(() => { dispatch(resetMsg()) }, 5500)
