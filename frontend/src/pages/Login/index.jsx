@@ -1,15 +1,18 @@
 import "./styles.scss"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { login } from "../../axios/api-calls"
 
 export function Login(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    
+    const navigate = useNavigate()
     const handleLogin = async (e) => {
         e.preventDefault()
-        login({"email": email, "password": password})
+        const validate = await login({"email": email, "password": password})
+        if (validate) {
+            navigate("/profile")
+        }
     }
 
     return(
