@@ -1,12 +1,12 @@
 import { publicRequest } from "./requestMethods";
 
 export const login = async (user) => {
-    try {
-        const res = await publicRequest.post("/auth/login", user);
-        return(res.data)
-    } catch (err) {
-        return false
-    }
+  try {
+      const res = await publicRequest.post("/auth/login", user);
+      return true
+  } catch (err) {
+      return false
+  }
 };
 
 export const registerUser = async (user) => {
@@ -20,7 +20,6 @@ export const registerUser = async (user) => {
 
 export const checkEmail = async (email) => {
   try {
-    console.log("Email",email)
     const res = await publicRequest.post("/auth/check-email", email);
     return res
   } catch (err) {

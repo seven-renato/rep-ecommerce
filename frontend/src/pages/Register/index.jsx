@@ -69,7 +69,6 @@ export function Register(){
     if (validateRegistration() && code === false) {
       const randomCode = generateRandomCode();
       setCode(randomCode);
-      console.log("CODE",code)
     }
   };
 
@@ -124,7 +123,7 @@ export function Register(){
           setTimeout(() => { dispatch(resetSucess()) }, 5500)
 
         } else {
-          dispatch(setMsg("Algo de errado aconteceu com o seu cadastro, certifique-se que não há uma conta já cadastrada com o e-mail informado e tente novamente."));
+          dispatch(setMsg("Algo de errado aconteceu com o seu cadastro, tente novamente mais tarde!"));
           setTimeout(() => { dispatch(resetMsg()) }, 7000)
           restartRegister()
         }}
