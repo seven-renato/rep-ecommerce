@@ -3,6 +3,9 @@ import { publicRequest } from "./requestMethods";
 export const login = async (user) => {
   try {
       const res = await publicRequest.post("/auth/login", user);
+      if (!res) {
+        return false
+      }
       return true
   } catch (err) {
       return false
