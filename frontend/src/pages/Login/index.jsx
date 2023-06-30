@@ -28,7 +28,7 @@ export function Login(){
                 <Link to={`/reset-password`}>Esqueceu a senha?</Link>
                 <div className="submit-form">
                     <span>Ao fazer login, você concorda com a Política de privacidade e com os Termos de uso do rep.com.br</span>
-                    <input type="submit" value="ENTRAR" className="login-submit" onClick={(e) => handleLogin(e)}/>
+                    <button type="submit" value="ENTRAR" className="login-submit" onClick={(e) => handleLogin(e)}>ENTRAR</button>
                 </div>
             </form>
             <span className="span-container">Não está cadastrado? <Link to={`/Register`}>Junte-se a nós.</Link></span>
