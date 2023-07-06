@@ -8,7 +8,7 @@ export const login = async (user) => {
       }
       return true
   } catch (err) {
-      return false
+      return err
   }
 };
 
