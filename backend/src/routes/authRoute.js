@@ -10,9 +10,10 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne({ where: { email } });
 
         if (!user) {
-          return res.status(401).json({ error: 'Invalid credentials!' });
+            return res.status(401).json({ error: 'Invalid credentials!' });
         }
-  
+        
+        console.log("cheguei")
         const decryptedPassword = CryptoJS.AES.decrypt(
             user.password,
             process.env.PASS_SEC
@@ -21,11 +22,17 @@ router.post('/login', async (req, res) => {
         const passwordMatch = decryptedPassword === password;
         
         if (passwordMatch) {
-            console.log("Validou!")
-            return res.status(201).json({ message: 'Login successful!' });
-        } else {
-            return res.status(401).json({ error: 'Invalid credentials!' });
-        }
+
+            const userJson = JSON.parse(JSON.stringify(user.dataValues));
+            const { Password, ...others } = userJson;
+
+            return res.status(201).json({ ...others});
+
+        } 
+        
+        console.log("entrei aqui")
+        res.status(200).json({ error: 'Invalid credentials!' });
+        
 
     } catch (error) {
         console.error('Error during login:', error);
