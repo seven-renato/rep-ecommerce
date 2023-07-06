@@ -8,28 +8,34 @@ import { setMsg, resetMsg, setSuccess} from "../../redux/userRedux";
 export function Login(){
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch()
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const navigate = useNavigate()
+
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        const validate = await login({"email": email, "password": password})
-        if (validate) {
-            console.log(user)
-            dispatch(setSuccess(true));
-            navigate("/profile")
-        } else {
-            console.log(user)
-            dispatch(setMsg("E-mail e/ou senha inválidos!"));
-            setTimeout(() => { dispatch(resetMsg()) }, 5000)
-            restartLogin()
-        }
-    }
-    const restartLogin = () => {
-        setEmail("")
-        setPassword("")
-    }
+
+        login({ "email": email, "password": password })
+        .then(response => {
+          console.log(response.status)
+          if (response.status === 201) {
+            console.log(response.data)
+            dispatch(setSuccess(response.data));
+          }
+          if (response.status === 200) {
+            dispatch(setMsg("E-mail e/ou senhas inválidos!"));
+            setTimeout(() => { dispatch(resetMsg()) }, 5000);
+          } 
+          if (response.status === 500) {
+            dispatch(setMsg("Algo de errado aconteceu com a sua tentativa de login."));
+            setTimeout(() => { dispatch(resetMsg()) }, 7000);
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
 
     return(
         <div className="login-container">

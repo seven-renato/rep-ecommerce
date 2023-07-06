@@ -12,8 +12,6 @@ export function Profile() {
 
     const name = user.name;
 
-    console.log(user)
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
