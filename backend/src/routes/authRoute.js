@@ -8,7 +8,6 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body;
   
         const user = await User.findOne({ where: { email } });
-
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials!' });
         }
@@ -17,8 +16,8 @@ router.post('/login', async (req, res) => {
         const decryptedPassword = CryptoJS.AES.decrypt(
             user.password,
             process.env.PASS_SEC
-        ).toString(CryptoJS.enc.Utf8);
-        
+            ).toString(CryptoJS.enc.Utf8);
+            
         const passwordMatch = decryptedPassword === password;
         
         if (passwordMatch) {
