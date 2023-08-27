@@ -1,0 +1,42 @@
+.newsletter-container {
+    height: 30vh;
+    background-color: #EDE734;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .desc {
+        font-size: 28px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+      
+    .input-container {
+        width: 50%;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+    }
+      
+    .input {
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+        border: none;
+        flex: 8;
+        padding-left: 20px;
+    }
+      
+    .button {
+        flex: 0.5;
+        margin-left: 10px;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        border-radius: 100%;
+        background-color: transparent;
+        color: white;
+        cursor: pointer;
+    }
+}  

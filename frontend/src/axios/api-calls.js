@@ -44,3 +44,12 @@ export const codeEmail = async (content) => {
     return false
   }
 };
+
+export const addProduct = async (product) => {
+  try {
+      const res = await publicRequest.post("/product/add", product);
+      return res
+  } catch (err) {
+      return err
+  }
+};
