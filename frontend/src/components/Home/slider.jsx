@@ -16,7 +16,7 @@ const Slider = () => {
 
   return (
     <div className='slider-container'>
-      <div className='arrow' onClick={() => handleClick("left")}>
+      <div className='arrow' direction="left" onClick={() => handleClick("left")}>
         <ArrowBackOutlinedIcon style={{ color: '#ffffff' }} />
       </div>
       <div className='wrapper' style={{ transform: `translateX(${slideIndex * -100}vw)` }}>
@@ -33,7 +33,7 @@ const Slider = () => {
           </div>
         ))}
       </div>
-      <div className='arrow' onClick={() => handleClick("right")}>
+      <div className='arrow' direction="right" onClick={() => handleClick("right")}>
         <ArrowForwardOutlinedIcon style={{ color: '#ffffff' }}/>
       </div>
     </div>
