@@ -1,8 +1,8 @@
-import "./styles/category-item.scss"
+import "./styles/categoryItem.scss"
 
 const CategoryItem = ({ item }) => {
   return (
-    <div className="container">
+    <div className="category-container">
         <img className="image" src={item.img}></img>
         <div className="info">
             <h1 className="title">{item.title}</h1>
